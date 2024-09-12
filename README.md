@@ -1,0 +1,6 @@
+# Table Names (Tables that aren't found in the Schema) (Warning) 
+# Column Names (Tables that aren't found in the Schema) (Warning)
+    ## Missing Columns (Info)
+# Check Foreign Column Exists (Warning)
+# Check Column Types (Warning if convertible like String to Float otherwise Error)
+# Iterate over properties (Error)
