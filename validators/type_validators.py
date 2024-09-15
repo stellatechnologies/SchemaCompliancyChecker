@@ -1,7 +1,6 @@
 # validators/type_validators.py
 
 import datetime
-import re
 
 def boolean_converter(x):
     if isinstance(x, bool):
@@ -15,7 +14,6 @@ def boolean_converter(x):
     elif isinstance(x, (int, float)):
         return x != 0
     raise ValueError(f"Cannot convert {x} to boolean.")
-
 
 def column_type_validator(col_name, col_val, col_type, logger):
     type_mapping = {
@@ -40,9 +38,6 @@ def column_type_validator(col_name, col_val, col_type, logger):
             return  # Correct type
         else:
             converted_value = expected_type_info['convert'](col_val)  # Attempt conversion
-            
-            print(f'Warning: Value {col_val} was converted to {col_type} type.')
             logger.add_message(f"Value '{col_val}' was converted to {col_type} type.", 'warning')
     except (ValueError, TypeError) as e:
-        print(f'Error: Value {col_val} is not compatible with {col_type} type and cannot be converted.')
         logger.add_message(f"Error: Value '{col_val}' is not compatible with {col_type} type and cannot be converted. {str(e)}", 'error')

@@ -1,9 +1,11 @@
+# validators/property_validators.py
+
 import re
 
-
 def regex_validator(val, regex):
-    return re.match(regex, val) if val is not None else False
-
+    if val is None:
+        return False
+    return re.match(regex, val) is not None
 
 def nullable_validator(val, nullable):
     if isinstance(nullable, bool):
