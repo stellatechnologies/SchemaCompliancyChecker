@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="static/images/Valigator_logo.png" alt="Valigator Logo" width="200"/>
+  <img src="static/images/ValiGator_logo.png" alt="Valigator Logo" width="200"/>
 </p>
 
 # Valigator
