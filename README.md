@@ -1,6 +1,6 @@
 # Schema and Data Validator
 
-This script validates a digital twin data file against a specified schema, ensuring:
+A web application and command-line tool that validates digital twin data files against a specified schema, ensuring:
 
 - Correct schema file formatting
 - Correct data file formatting
@@ -10,189 +10,185 @@ This script validates a digital twin data file against a specified schema, ensur
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Web Interface](#web-interface)
+- [Command Line Interface](#command-line-interface)
 - [Schema and Data Format](#schema-and-data-format)
 - [Validation Process](#validation-process)
-- [Usage](#usage)
 - [Logging](#logging)
-- [Examples](#examples)
+- [Testing](#testing)
 - [License](#license)
 
 ## Installation
 
-Ensure you have Python 3.x installed. Then install the required libraries:
+1. Ensure you have Python 3.x installed
+2. Clone this repository
+3. Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+### Web Interface
+
+Start the web application:
+
+```bash
+python app.py
+```
+
+Then navigate to `http://localhost:5000` in your browser. The web interface allows you to:
+- Upload schema and data files
+- View real-time validation progress
+- See validation results with color-coded messages
+- Download validation reports
+
+### Command Line Interface
+
+Run the validator script directly:
+
+```bash
+python main.py path/to/schema.json path/to/data.json
+```
 
 ## Schema and Data Format
 
 ### Schema Format
-
-The schema JSON file should be formatted as follows:
-
 ```json
 {
-    "version": "version of the cyber data schema",
-    "release_date": "date of the release",
-    "commentary": "commentary about the specific release",
+    "version": "1.0",
+    "release_date": "2024-03-20",
+    "commentary": "Schema description",
     "tables": [
         {
-            "uuid": "uuid of the table",
-            "name": "name of the table",
-            "description": "description of the table",
-            "type": "type of the table",
-            "pos_x": "x-coordinate position",
-            "pos_y": "y-coordinate position",
+            "uuid": "table-uuid",
+            "name": "TableName",
+            "description": "Table description",
+            "type": "entity",
+            "pos_x": "0",
+            "pos_y": "0",
             "columns": [
                 {
-                    "uuid": "uuid of the column",
-                    "name": "name of the column",
-                    "description": "description of the column",
-                    "type": "type of the column",
-                    "relationship": [
-                        {
-                            "uuid": "uuid of the relationship",
-                            "type": "type of the relationship",
-                            "table_uuid": "uuid of the related table",
-                            "column_uuid": "uuid of the related column",
-                            "description": "description of the relationship"
-                        }
-                    ],
+                    "uuid": "column-uuid",
+                    "name": "column_name",
+                    "description": "Column description",
+                    "type": "column-type-uuid",
+                    "relationship": null,
                     "properties": [
                         {
-                            "uuid": "uuid of the property",
-                            "type": "type of the property",
-                            "value": "value of the property"
+                            "type": "property-type-uuid",
+                            "value": "property-value"
                         }
                     ]
                 }
             ]
         }
     ],
-    "table_types": [
-        {
-            "uuid": "uuid of the table type",
-            "name": "name of the table type",
-            "description": "description of the table type",
-            "color": "color of the table type"
-        }
-    ],
-    "column_types": [
-        {
-            "uuid": "uuid of the column type",
-            "name": "name of the column type",
-            "description": "description of the column type"
-        }
-    ],
-    "relationship_types": [
-        {
-            "uuid": "uuid of the relationship type",
-            "name": "name of the relationship type",
-            "description": "description of the relationship type"
-        }
-    ],
-    "property_types": [
-        {
-            "uuid": "uuid of the property type",
-            "name": "name of the property type",
-            "description": "description of the property type"
-        }
-    ]
+    "table_types": [...],
+    "column_types": [...],
+    "relationship_types": [...],
+    "property_types": [...]
 }
 ```
 
 ### Data Format
-
-The data JSON file (digital twin data) should be formatted as follows:
-
 ```json
 {
-    "Class1": [
+    "TableName": [
         {
-            "Property1": "Value1",
-            "Property2": "Value2"
-        },
-        {
-            "Property1": "Value1",
-            "Property2": "Value2"
-        }
-    ],
-    "Class2": [
-        {
-            "Property3": "Value3",
-        },
-        {
-            "Property3": "Value3",
-            "Property4": "Value4"
+            "column_name": "value",
+            "another_column": "another_value"
         }
     ]
 }
 ```
 
-## Usage
-
-Run the validator script with the schema and data files as command-line arguments:
-
-```bash
-python run.py path/to/schema.json path/to/data.json
-```
-
 ## Validation Process
 
-The script performs the following validation steps:
+The validator performs these checks in sequence:
 
-    Schema Validation: Ensures that the schema file is correctly formatted and contains all required keys and structures.
+1. **Schema Structure Validation**
+   - Verifies required keys and correct data types
+   - Validates nested structures and relationships
 
-    Data Validation: Ensures that the data file is correctly formatted and matches the structure expected by the schema.
+2. **Data Structure Validation**
+   - Ensures proper JSON formatting
+   - Validates basic data structure requirements
 
-    Table/Class Names Check: Checks if all classes (tables) in the data are defined in the schema. Logs warnings for any classes not found in the schema.
+3. **Table Name Validation**
+   - Checks if data tables exist in schema
+   - Reports missing or extra tables
 
-    Column/Attribute Names Check: For each class, checks if all attributes (columns) in the data objects are defined in the schema. Logs warnings for any attributes not found in the schema.
+4. **Column Name Validation**
+   - Verifies column names against schema
+   - Reports undefined or missing columns
 
-    Foreign Key Checks: Validates relationships between objects according to foreign keys defined in the schema. Logs warnings if related objects are missing.
+5. **Column Type Validation**
+   - Validates data types of values
+   - Attempts type conversion where possible
 
-    Column Types Validation: Checks that each attribute's value matches the expected data type defined in the schema. If the value can be converted to the correct type, logs a warning. If not, logs an error.
+6. **Foreign Key Validation**
+   - Checks relationship integrity
+   - Validates referenced data exists
 
-    Property Checks: Validates properties like nullable and regex constraints defined in the schema for each attribute.
+7. **Property Validation**
+   - Validates regex patterns
+   - Checks nullable constraints
+   - Verifies numeric bounds (min/max)
 
 ## Logging
 
-The script uses a logger to collect messages at different severity levels:
+Messages are categorized into four levels:
+- **Structural Errors**: Fatal issues in basic structure
+- **Errors**: Validation failures that need attention
+- **Warnings**: Potential issues to review
+- **Info**: Informational messages
 
-    INFO: General informational messages.
-    WARNING: Non-critical issues that may need attention.
-    ERROR: Critical issues that prevent validation from proceeding.
+## Testing
 
-At the end of the validation, the script prints all logged messages.
-
-## Requirements
-
-    Python 3.x
-    tqdm library for progress bars
-
-Install the required libraries using:
+Run the test suite:
 
 ```bash
-pip install tqdm
+python -m unittest discover tests
 ```
 
-## Examples
+Test scenarios cover:
+- Schema validation
+- Data validation
+- Table validation
+- Column validation
+- Type validation
+- Foreign key validation
+- Property validation
 
-### Running the Validator
+## Validation Matrix
 
-```bash
-python run.py schema.json data.json
-```
-Sample Output
+| Validation Type | Scenario | Structural<br>Error | Error | Warning | Info | Example/Explanation |
+|----------------|----------|:------------------:|:------:|:-------:|:----:|-------------------|
+| **Schema Structure** | Missing required key | ✓ | | | | "Schema is missing required key: 'tables'" - Schema must contain all required top-level keys |
+| | Invalid data type | ✓ | | | | "'tables' should be a list in the schema" - Schema elements must be of correct type |
+| **Data Structure** | Invalid JSON format | ✓ | | | | "Data must be a dictionary" - Data file must be valid JSON object |
+| | Invalid object format | ✓ | | | | "Each object in class 'User' should be a dictionary" - Table entries must be objects |
+| **Table Names** | Table in data missing from schema | | | ✓ | | "The Class 'User' is not found in schema" - Data contains table not defined in schema |
+| | Table in schema missing from data | | | | ✓ | "The Class 'User' is not found in data" - Optional table defined in schema but not in data |
+| **Column Names** | Column in data missing from schema | | | ✓ | | "The attribute User.email is not a valid column" - Data contains undefined column |
+| | Column in schema missing from data | | | | ✓ | "User.email not found in data" - Optional column not present in data |
+| **Column Types** | Invalid type, not convertible | | ✓ | | | "Value 'abc' cannot be converted to INT type" - String in numeric field |
+| | Array type conversion | | | | ✓ | "Value '[1,2,3]' was converted to Array(INT)" - Valid array conversion |
+| | Other type conversion | | | ✓ | | "Value '123' was converted from STRING to INT" - Automatic type conversion |
+| **Foreign Keys** | Referenced table missing | | | ✓ | | "Related table 'Department' not found for foreign key 'dept_id'" - Missing referenced table |
+| | Referenced value missing | | | ✓ | | "User.dept_id with value 5 not related to any Department.id" - Invalid reference |
+| **Properties** | Invalid regex pattern | | ✓ | | | "email 'invalid-email' against property regex" - Email doesn't match pattern |
+| | Non-nullable field is null | | ✓ | | | "name with value None against property nullable with condition false" - Required field is null |
+| | Value below minimum | | ✓ | | | "age with value 15 against property NoLessThan with condition 18" - Age below minimum |
+| | Value above maximum | | ✓ | | | "score with value 105 against property NoGreaterThan with condition 100" - Score exceeds maximum |
 
-```sql
-
-Table/Class Names: 100%|██████████| 2/2 [00:00<00:00, 1000.00it/s]
-Column/Attribute Names: 100%|██████████| 2/2 [00:00<00:00, 500.00it/s]
-Foreign Keys: 100%|██████████| 2/2 [00:00<00:00, 500.00it/s]
-Column Types: 100%|██████████| 2/2 [00:00<00:00, 500.00it/s]
-Property Types: 100%|██████████| 2/2 [00:00<00:00, 500.00it/s]
-INFO: Class1.Property2 not found in data
-WARNING: The attribute Class1.InvalidAttribute is not a valid column in the schema
-ERROR: Value 'invalid_date' is not compatible with DATE type and cannot be converted. time data 'invalid_date' does not match format '%Y-%m-%d'
-```
+Message Types:
+- **Structural Error**: Fatal issues that prevent further validation
+- **Error**: Validation failures that must be fixed
+- **Warning**: Potential issues that should be reviewed
+- **Info**: Informational messages about optional elements
 
 ## License
 

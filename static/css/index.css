@@ -1,0 +1,104 @@
+/* Google Fonts are included in HTML head if needed.
+ * We'll rely on your chosen font family there.
+ */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+  
+.plushy-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    padding: 40px 30px;
+    text-align: center;
+    margin: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+  
+.title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+  
+.title i {
+    font-size: 2rem;
+}
+  
+.upload-label {
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+.upload-label i {
+    color: #2563eb;
+}
+  
+.form-control {
+    border: 2px solid #e5e7eb;
+    border-radius: 15px;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+  
+.form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+  
+.btn-primary {
+    background-color: #2563eb;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+}
+  
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+  
+.alert {
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+  
+
+
+.title-icon {
+    width: 42px;
+    height: 42px;
+    color: #2563eb;
+}

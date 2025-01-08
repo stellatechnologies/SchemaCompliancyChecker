@@ -23,8 +23,15 @@ def column_type_validator(col_name, col_val, col_type, logger):
         'INT': {'type': int, 'convert': int},
         'DATETIME': {'type': datetime.datetime, 'convert': lambda x: datetime.datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')},
         'VARCHAR(255)': {'type': str, 'convert': str},
+        'VARCHAR(45)': {'type': str, 'convert': str},
         'Array(VARCHAR(255))': {'type': list, 'convert': lambda x: [str(i) for i in x] if isinstance(x, list) else [str(x)]},
-        'BLOB': {'type': bytes, 'convert': bytes}  # Assuming input can be handled as bytes
+        'Array(INT)': {'type': list, 'convert': lambda x: [int(i) for i in x] if isinstance(x, list) else [int(x)]},
+        'Array(FLOAT)': {'type': list, 'convert': lambda x: [float(i) for i in x] if isinstance(x, list) else [float(x)]},
+        'Array(BOOLEAN)': {'type': list, 'convert': lambda x: [boolean_converter(i) for i in x] if isinstance(x, list) else [boolean_converter(x)]},
+        'Array(DATE)': {'type': list, 'convert': lambda x: [datetime.datetime.strptime(i, '%Y-%m-%d').date() for i in x] if isinstance(x, list) else [datetime.datetime.strptime(x, '%Y-%m-%d').date()]},
+        'Array(DATETIME)': {'type': list, 'convert': lambda x: [datetime.datetime.strptime(i, '%Y-%m-%dT%H:%M:%S') for i in x] if isinstance(x, list) else [datetime.datetime.strptime(x, '%Y-%m-%dT%H:%M:%S')]},
+        'BLOB': {'type': str, 'convert': str},
+        'TINYINT': {'type': int, 'convert': int},
     }
 
     expected_type_info = type_mapping.get(col_type)
@@ -34,8 +41,17 @@ def column_type_validator(col_name, col_val, col_type, logger):
         return
 
     try:
-        if isinstance(col_val, expected_type_info['type']):
-            return  # Correct type
+        if col_type.startswith('Array('):
+            converted_value = expected_type_info['convert'](col_val)
+            
+            if col_type == 'Array(VARCHAR(255))':
+                logger.add_message(f"Value '{col_val}' was converted to {col_type} type.", 'info')
+                return
+            
+            if str(col_val) != str(converted_value):
+                logger.add_message(f"Value '{col_val}' was converted to {col_type} type.", 'warning')
+        elif isinstance(col_val, expected_type_info['type']):
+            return
         else:
             converted_value = expected_type_info['convert'](col_val)  # Attempt conversion
             logger.add_message(f"Value '{col_val}' was converted to {col_type} type.", 'warning')

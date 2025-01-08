@@ -1,0 +1,228 @@
+/* Floating stars background */
+.shapes {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  filter: brightness(0.8) contrast(1.2);
+  opacity: 0.8;
+}
+
+/* Random sizes for floating stars */
+.shape-1 { width: 38px; height: 38px; }
+.shape-2 { width: 52px; height: 52px; }
+.shape-3 { width: 29px; height: 29px; }
+.shape-4 { width: 45px; height: 45px; }
+.shape-5 { width: 33px; height: 33px; }
+.shape-6 { width: 41px; height: 41px; }
+.shape-7 { width: 36px; height: 36px; }
+.shape-8 { width: 48px; height: 48px; }
+
+/* Random positions and animations for floating stars */
+.shape-1 {
+  top: 15%;
+  left: 12%;
+  animation: drift1 15s linear infinite;
+  animation-delay: -3s;
+}
+
+.shape-2 {
+  bottom: 25%;
+  right: 18%;
+  animation: drift2 18s linear infinite;
+  animation-delay: -7s;
+}
+
+.shape-3 {
+  top: 45%;
+  left: 28%;
+  animation: drift3 21s linear infinite;
+  animation-delay: -12s;
+}
+
+.shape-4 {
+  top: 97%;
+  right: 43%;
+  animation: drift4 19s linear infinite;
+  animation-delay: -5s;
+}
+
+.shape-5 {
+  bottom: 18%;
+  left: 35%;
+  animation: drift5 16s linear infinite;
+  animation-delay: -9s;
+}
+
+.shape-6 {
+  top: 35%;
+  right: 45%;
+  animation: drift6 17s linear infinite;
+  animation-delay: -2s;
+}
+
+.shape-7 {
+  top: 28%;
+  right: 15%;
+  animation: drift7 20s linear infinite;
+  animation-delay: -8s;
+}
+
+.shape-8 {
+  bottom: 35%;
+  left: 42%;
+  animation: drift8 14s linear infinite;
+  animation-delay: -4s;
+}
+
+/* Flying stars with random delays and durations */
+.shape-9 {
+  top: -50px;
+  left: -50px;
+  width: 35px;
+  height: 35px;
+  animation: flyBottomRight 7.5s ease-in-out infinite;
+  animation-delay: -1s;
+}
+
+.shape-10 {
+  bottom: -50px;
+  right: -50px;
+  width: 44px;
+  height: 44px;
+  animation: flyTopLeft 11.3s ease-in-out infinite;
+  animation-delay: -4.2s;
+}
+
+.shape-11 {
+  top: 45%;
+  left: -50px;
+  width: 39px;
+  height: 39px;
+  animation: flyRight 9.7s ease-in-out infinite;
+  animation-delay: -2.8s;
+}
+
+.shape-12 {
+  bottom: 35%;
+  right: -50px;
+  width: 31px;
+  height: 31px;
+  animation: flyLeft 8.9s ease-in-out infinite;
+  animation-delay: -6.5s;
+}
+
+.shape-13 {
+  top: 77%;
+  left: -1%;
+  width: 50px;
+  height: 50px;
+  animation: drift13 25s linear infinite;
+}
+
+
+/* Continuous drifting animations */
+@keyframes drift1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(30px, 15px) rotate(90deg); }
+  50% { transform: translate(15px, 35px) rotate(180deg); }
+  75% { transform: translate(-20px, 20px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes drift2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-25px, 25px) rotate(-90deg); }
+  50% { transform: translate(-35px, -15px) rotate(-180deg); }
+  75% { transform: translate(15px, -25px) rotate(-270deg); }
+  100% { transform: translate(0, 0) rotate(-360deg); }
+}
+
+@keyframes drift3 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(20px, -30px) rotate(120deg); }
+  50% { transform: translate(35px, 0) rotate(240deg); }
+  75% { transform: translate(15px, 25px) rotate(360deg); }
+  100% { transform: translate(0, 0) rotate(480deg); }
+}
+
+@keyframes drift4 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-15px, -25px) rotate(-120deg); }
+  50% { transform: translate(-30px, 15px) rotate(-240deg); }
+  75% { transform: translate(-20px, -20px) rotate(-360deg); }
+  100% { transform: translate(0, 0) rotate(-480deg); }
+}
+
+@keyframes drift5 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(25px, 20px) rotate(90deg); }
+  50% { transform: translate(-15px, 30px) rotate(180deg); }
+  75% { transform: translate(-25px, 10px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes drift6 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-20px, 15px) rotate(-90deg); }
+  50% { transform: translate(20px, 25px) rotate(-180deg); }
+  75% { transform: translate(30px, -15px) rotate(-270deg); }
+  100% { transform: translate(0, 0) rotate(-360deg); }
+}
+
+@keyframes drift7 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(15px, 30px) rotate(120deg); }
+  50% { transform: translate(-25px, 20px) rotate(240deg); }
+  75% { transform: translate(-15px, -25px) rotate(360deg); }
+  100% { transform: translate(0, 0) rotate(480deg); }
+}
+
+@keyframes drift8 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-30px, -15px) rotate(-120deg); }
+  50% { transform: translate(20px, -25px) rotate(-240deg); }
+  75% { transform: translate(25px, 20px) rotate(-360deg); }
+  100% { transform: translate(0, 0) rotate(-480deg); }
+}
+
+@keyframes drift13 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Flying animations with varied paths */
+@keyframes flyBottomRight {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0); opacity: 0; }
+  25% { transform: translate(120px, 80px) rotate(180deg) scale(1); opacity: 0.9; }
+  75% { transform: translate(calc(100vw - 80px), calc(100vh - 120px)) rotate(420deg) scale(0.9); opacity: 0.9; }
+  100% { transform: translate(100vw, 100vh) rotate(540deg) scale(0); opacity: 0; }
+}
+
+@keyframes flyTopLeft {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0); opacity: 0; }
+  25% { transform: translate(-80px, -120px) rotate(-180deg) scale(1); opacity: 0.9; }
+  75% { transform: translate(calc(-100vw + 120px), calc(-100vh + 80px)) rotate(-420deg) scale(0.9); opacity: 0.9; }
+  100% { transform: translate(-100vw, -100vh) rotate(-540deg) scale(0); opacity: 0; }
+}
+
+@keyframes flyRight {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0); opacity: 0; }
+  25% { transform: translate(150px, -20px) rotate(120deg) scale(1); opacity: 0.9; }
+  75% { transform: translate(calc(100vw - 80px), 30px) rotate(330deg) scale(0.9); opacity: 0.9; }
+  100% { transform: translate(100vw, 0) rotate(450deg) scale(0); opacity: 0; }
+}
+
+@keyframes flyLeft {
+  0% { transform: translate(0, 0) rotate(0deg) scale(0); opacity: 0; }
+  25% { transform: translate(-150px, 20px) rotate(-120deg) scale(1); opacity: 0.9; }
+  75% { transform: translate(calc(-100vw + 80px), -30px) rotate(-330deg) scale(0.9); opacity: 0.9; }
+  100% { transform: translate(-100vw, 0) rotate(-450deg) scale(0); opacity: 0; }
+}
