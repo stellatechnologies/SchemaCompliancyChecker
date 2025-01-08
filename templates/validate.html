@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/validate.css') }}">
     <!-- Background CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/background.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 </head>
 
 <body>
@@ -36,7 +37,8 @@
 
     <div class="plushy-card">
         <h1 class="title">
-            <i class="fas fa-cogs"></i>
+            <img src="{{ url_for('static', filename='images/Valigator_logo.png') }}" alt="Valigator" class="title-icon">
+            <span class="vali">Vali</span><span class="gator">gator</span>
             Validation in Progress
         </h1>
         
@@ -200,7 +202,7 @@
                     document.getElementById('structural-error-count').textContent = structural_errors.length;
 
                     // Summary
-                    const summaryText = `${errors.length} error(s), ${warnings.length} warning(s), ${info.length} info message(s), ${structural_errors.length} structural error(s)`;
+                    const summaryText = `${structural_errors.length} structural error(s), ${errors.length} error(s), ${warnings.length} warning(s), ${info.length} info message(s)`;
                     document.getElementById('results-summary').textContent = summaryText;
 
                     // Helper function to create message elements

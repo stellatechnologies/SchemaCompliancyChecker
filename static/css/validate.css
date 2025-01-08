@@ -248,3 +248,23 @@ body {
     margin-right: 8px;
     width: 16px;
 }
+
+.title-icon {
+    width: 69px;
+    height: auto; /* Changed from fixed height to maintain aspect ratio */
+    margin-right: 8px;
+}
+
+.vali {
+    color: #2563eb;  /* Original blue color */
+}
+
+.gator {
+    color: #1fe45f;  /* Bright green color */
+}
+
+.vali, .gator {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}

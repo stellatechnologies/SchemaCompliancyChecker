@@ -1,10 +1,22 @@
-# Schema and Data Validator
 
-A web application and command-line tool that validates digital twin data files against a specified schema, ensuring:
 
-- Correct schema file formatting
-- Correct data file formatting
-- Data conformity to schema rules (data types, relationships, and properties)
+<p align="center">
+  <img src="static/images/Valigator_logo.png" alt="Valigator Logo" width="200"/>
+</p>
+
+# Valigator
+
+###  A web application and command-line tool that validates digital twin data files against a data schema's rule sets.
+
+
+
+
+
+<p align="center" style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+  <img src="static/images/App_Preview.png" alt="Valigator App Preview" width="600"/>
+  <img src="static/images/App_Preview_Validation.png" alt="Valigator Validation Preview" width="600"/>
+</p>
+
 
 ## Table of Contents
 
